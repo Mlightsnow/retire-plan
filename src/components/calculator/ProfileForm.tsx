@@ -11,13 +11,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { UserProfile } from "@/types";
+import { CalendarDays, User, Briefcase } from "lucide-react";
 
 interface ProfileFormProps {
   onSubmit: (profile: UserProfile) => void;
   initialValues?: UserProfile;
 }
 
-// 生成年份选项 (1950-2000)
 const years = Array.from({ length: 51 }, (_, i) => 1950 + i);
 const months = Array.from({ length: 12 }, (_, i) => i + 1);
 
@@ -48,15 +48,30 @@ export function ProfileForm({ onSubmit, initialValues }: ProfileFormProps) {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle className="text-center">退休信息录入</CardTitle>
+    <Card className="w-full">
+      {/* Gold accent top bar */}
+      <div className="h-1 bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent" />
+
+      <CardHeader className="text-center pb-2">
+        <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-[var(--gold)]/10 to-[var(--gold)]/5 flex items-center justify-center mb-3">
+          <CalendarDays className="w-8 h-8 text-[var(--gold)]" />
+        </div>
+        <CardTitle className="font-display text-2xl sm:text-3xl">
+          退休信息录入
+        </CardTitle>
+        <p className="text-muted-foreground text-base mt-1">
+          输入您的基本信息，计算精确退休时间
+        </p>
       </CardHeader>
+
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-7">
           {/* 出生年月 */}
-          <div className="space-y-2">
-            <label className="text-lg font-medium">出生年月</label>
+          <div className="space-y-3">
+            <label className="flex items-center gap-2 text-lg font-semibold font-display">
+              <CalendarDays className="w-5 h-5 text-[var(--gold)]" />
+              出生年月
+            </label>
             <div className="flex gap-3">
               <Select value={birthYear} onValueChange={setBirthYear}>
                 <SelectTrigger className="flex-1">
@@ -71,7 +86,7 @@ export function ProfileForm({ onSubmit, initialValues }: ProfileFormProps) {
                 </SelectContent>
               </Select>
               <Select value={birthMonth} onValueChange={setBirthMonth}>
-                <SelectTrigger className="w-32">
+                <SelectTrigger className="w-28 sm:w-32">
                   <SelectValue placeholder="月份" />
                 </SelectTrigger>
                 <SelectContent>
@@ -86,55 +101,81 @@ export function ProfileForm({ onSubmit, initialValues }: ProfileFormProps) {
           </div>
 
           {/* 性别 */}
-          <div className="space-y-2">
-            <label className="text-lg font-medium">性别</label>
-            <div className="flex gap-3">
-              <Button
+          <div className="space-y-3">
+            <label className="flex items-center gap-2 text-lg font-semibold font-display">
+              <User className="w-5 h-5 text-[var(--gold)]" />
+              性别
+            </label>
+            <div className="grid grid-cols-2 gap-3">
+              <button
                 type="button"
-                variant={gender === "male" ? "default" : "outline"}
-                className="flex-1"
                 onClick={() => setGender("male")}
+                className={`
+                  relative h-14 rounded-xl text-lg font-medium transition-all duration-300
+                  ${gender === "male"
+                    ? "bg-gradient-to-r from-[var(--gold)] to-[var(--gold-light)] text-white shadow-[var(--shadow-warm)]"
+                    : "border-2 border-[var(--gold)]/20 bg-transparent hover:border-[var(--gold)]/40 hover:bg-[var(--gold)]/5"
+                  }
+                `}
               >
                 男
-              </Button>
-              <Button
+              </button>
+              <button
                 type="button"
-                variant={gender === "female" ? "default" : "outline"}
-                className="flex-1"
                 onClick={() => setGender("female")}
+                className={`
+                  relative h-14 rounded-xl text-lg font-medium transition-all duration-300
+                  ${gender === "female"
+                    ? "bg-gradient-to-r from-[var(--gold)] to-[var(--gold-light)] text-white shadow-[var(--shadow-warm)]"
+                    : "border-2 border-[var(--gold)]/20 bg-transparent hover:border-[var(--gold)]/40 hover:bg-[var(--gold)]/5"
+                  }
+                `}
               >
                 女
-              </Button>
+              </button>
             </div>
           </div>
 
           {/* 身份类型（仅女性显示） */}
           {gender === "female" && (
-            <div className="space-y-2">
-              <label className="text-lg font-medium">身份类型</label>
-              <div className="flex gap-3">
-                <Button
+            <div className="space-y-3 animate-fade-in">
+              <label className="flex items-center gap-2 text-lg font-semibold font-display">
+                <Briefcase className="w-5 h-5 text-[var(--gold)]" />
+                身份类型
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
                   type="button"
-                  variant={workerType === "worker" ? "default" : "outline"}
-                  className="flex-1"
                   onClick={() => setWorkerType("worker")}
+                  className={`
+                    relative h-14 rounded-xl text-lg font-medium transition-all duration-300
+                    ${workerType === "worker"
+                      ? "bg-gradient-to-r from-[var(--gold)] to-[var(--gold-light)] text-white shadow-[var(--shadow-warm)]"
+                      : "border-2 border-[var(--gold)]/20 bg-transparent hover:border-[var(--gold)]/40 hover:bg-[var(--gold)]/5"
+                    }
+                  `}
                 >
                   工人
-                </Button>
-                <Button
+                </button>
+                <button
                   type="button"
-                  variant={workerType === "cadre" ? "default" : "outline"}
-                  className="flex-1"
                   onClick={() => setWorkerType("cadre")}
+                  className={`
+                    relative h-14 rounded-xl text-lg font-medium transition-all duration-300
+                    ${workerType === "cadre"
+                      ? "bg-gradient-to-r from-[var(--gold)] to-[var(--gold-light)] text-white shadow-[var(--shadow-warm)]"
+                      : "border-2 border-[var(--gold)]/20 bg-transparent hover:border-[var(--gold)]/40 hover:bg-[var(--gold)]/5"
+                    }
+                  `}
                 >
                   干部
-                </Button>
+                </button>
               </div>
             </div>
           )}
 
           {/* 提交按钮 */}
-          <Button type="submit" size="lg" className="w-full">
+          <Button type="submit" size="lg" className="w-full text-xl font-display tracking-wider">
             计算退休时间
           </Button>
         </form>

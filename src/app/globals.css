@@ -1,87 +1,296 @@
+/* Google Fonts - must be first */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap');
+
 @import "tailwindcss";
 
+/* ================================================
+   墨金 - Ink & Gold Design System
+   退休规划助手视觉系统
+   ================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --card: #ffffff;
-  --card-foreground: #171717;
-  --primary: #2563eb;
-  --primary-foreground: #ffffff;
-  --secondary: #f5f5f5;
-  --secondary-foreground: #171717;
-  --muted: #f5f5f5;
-  --muted-foreground: #737373;
-  --accent: #f5f5f5;
-  --accent-foreground: #171717;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #e5e5e5;
-  --input: #e5e5e5;
-  --ring: #2563eb;
-  --radius: 0.75rem;
+  /* === 核心色板 === */
+  --ink: #1A1A1A;
+  --ink-light: #2D2D2D;
+  --gold: #B8860B;
+  --gold-light: #D4A574;
+  --gold-deep: #8B6914;
+  --cream: #FAF7F2;
+  --cream-dark: #F0EBE3;
+  --paper: #FFFFFF;
+  --mist: #E8E4DE;
+
+  /* === 语义变量 === */
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --primary: var(--gold);
+  --primary-foreground: var(--paper);
+  --secondary: var(--cream-dark);
+  --secondary-foreground: var(--ink);
+  --muted: var(--mist);
+  --muted-foreground: #5C5C5C;
+  --accent: var(--gold-light);
+  --accent-foreground: var(--ink);
+  --destructive: #9B2C2C;
+  --destructive-foreground: var(--paper);
+  --border: #D9D4CC;
+  --input: #E8E4DE;
+  --ring: var(--gold);
+  --radius: 1rem;
+
+  /* === 特殊效果 === */
+  --gold-gradient: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+  --ink-gradient: linear-gradient(180deg, var(--ink) 0%, var(--ink-light) 100%);
+  --shadow-warm: 0 4px 24px -4px rgba(184, 134, 11, 0.15), 0 2px 8px -2px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px -8px rgba(0, 0, 0, 0.08);
+  --shadow-elevated: 0 12px 40px -12px rgba(0, 0, 0, 0.12), 0 4px 12px -4px rgba(184, 134, 11, 0.08);
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --card: #1a1a1a;
-  --card-foreground: #ededed;
-  --primary: #3b82f6;
-  --primary-foreground: #ffffff;
-  --secondary: #262626;
-  --secondary-foreground: #ededed;
-  --muted: #262626;
-  --muted-foreground: #a3a3a3;
-  --accent: #262626;
-  --accent-foreground: #ededed;
-  --destructive: #7f1d1d;
-  --destructive-foreground: #ffffff;
-  --border: #262626;
-  --input: #262626;
-  --ring: #3b82f6;
+  --background: #101010;
+  --foreground: #F5F2ED;
+  --card: #1A1A1A;
+  --card-foreground: #F5F2ED;
+  --primary: #D4A574;
+  --primary-foreground: #101010;
+  --secondary: #252525;
+  --secondary-foreground: #F5F2ED;
+  --muted: #1F1F1F;
+  --muted-foreground: #A8A8A8;
+  --accent: #D4A574;
+  --accent-foreground: #101010;
+  --destructive: #7F1D1D;
+  --destructive-foreground: #F5F2ED;
+  --border: #2D2D2D;
+  --input: #252525;
+  --ring: #D4A574;
+
+  --gold-gradient: linear-gradient(135deg, #D4A574 0%, #E8C89E 50%, #D4A574 100%);
+  --ink-gradient: linear-gradient(180deg, #101010 0%, #1A1A1A 100%);
+  --shadow-warm: 0 4px 24px -4px rgba(0, 0, 0, 0.4), 0 2px 8px -2px rgba(0, 0, 0, 0.2);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.2), 0 8px 24px -8px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 12px 40px -12px rgba(0, 0, 0, 0.5), 0 4px 12px -4px rgba(212, 165, 116, 0.1);
 }
 
+/* === 全局重置 === */
 * {
   border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-size: 18px;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* 适老化设计：大字体、大按钮 */
+/* === 标题字体 === */
+.font-display {
+  font-family: "Noto Serif SC", serif;
+}
+
+h1, h2, h3 {
+  font-family: "Noto Serif SC", serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* === 回字纹边框装饰 === */
+.pattern-border {
+  position: relative;
+}
+
+.pattern-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--gold) 25%,
+    transparent 25%,
+    transparent 50%,
+    var(--gold) 50%,
+    var(--gold) 75%,
+    transparent 75%
+  );
+  background-size: 8px 2px;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pattern-border:hover::before,
+.pattern-border:focus-within::before {
+  opacity: 1;
+}
+
+/* === 金边卡片 === */
+.card-gold {
+  position: relative;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.card-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(184, 134, 11, 0.3) 50%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* === 动画入场 === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(184, 134, 11, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(184, 134, 11, 0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+/* === 按钮热区 === */
+button,
+[role="button"],
+input,
+select {
+  min-height: 52px;
+  font-size: 18px;
+}
+
+/* === 表单增强 === */
+input:focus,
+select:focus,
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.2);
+}
+
+/* === 金色光晕文字 === */
+.text-gold-glow {
+  text-shadow: 0 0 40px rgba(184, 134, 11, 0.3);
+}
+
+/* === 装饰性分隔线 === */
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gold) 20%,
+    var(--gold) 80%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+/* === 背景纹理 === */
+.texture-paper {
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(184, 134, 11, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(184, 134, 11, 0.03) 0%, transparent 50%);
+}
+
+.dark .texture-paper {
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(212, 165, 116, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(212, 165, 116, 0.05) 0%, transparent 50%);
+}
+
+/* === 适老化增强 === */
 @media (min-width: 640px) {
   body {
     font-size: 18px;
   }
 }
 
-/* 确保按钮热区足够大 */
-button,
-[role="button"],
-input,
-select {
-  min-height: 48px;
-  font-size: 18px;
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+  :root {
+    --border: #000000;
+    --muted-foreground: #333333;
+  }
 }
 
-/* 高对比度文本 */
-.high-contrast {
-  color: var(--foreground);
+/* === 优雅过渡 === */
+.theme-transition * {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease, box-shadow 0.3s ease;
 }
 
-/* 卡片样式 */
-.card {
-  background: var(--card);
-  color: var(--card-foreground);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
+/* === 滚动条美化 === */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-/* 主题过渡 */
-* {
-  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+::-webkit-scrollbar-track {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
 }
